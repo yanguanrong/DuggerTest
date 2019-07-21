@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Title</title>
+</head>
+
+<script src="vue/vue-2.4.0.js"></script>
+<style>
+    [v-cloak]{
+        display: none;
+    }
+</style>
+<body>
+
+    <div id="app">
+        <!--使用 v-cloak 能够解决 插值表达式闪烁的问题 -->
+        <p v-cloak>++++++{{msg}}------</p>
+        <!--v-text也可以赋值 而且默认 v-text 没有闪烁问题
+         但是 v-text会覆盖元素中原本的内容
+         而插值表达式 只会替换自己的这个占位符 不会把整个元素的内容清空
+        -->
+        <P v-text="msg">+++++++-----</P>
+        <div>{{msg2}}</div>
+        <div v-text="msg2"></div>
+        <!--v-html 可以把内容当做html解析出来 -->
+        <div v-html="msg2"></div>
+
+        <input type="button" value="按钮" title="123">
+        <!-- v-bind: 是Vue中 提供用于绑定属性的指令
+         因为 title 是input标签中的一个属性  所以 v-bind:title 可以绑定这个属性
+         mytitle可以看做是一个变量 然后把这个变量的值（这是一个自己定义的title） 赋给title-->
+        <input type="button" value="按钮" v-bind:title="mytitle">
+        <!--还可以加上一些东西 形成一个表达式一样 即 v-bind: 中可以写合法的表达式-->
+        <input type="button" value="按钮" v-bind:title="mytitle+'123'">
+        <!-- 还可以简写 :title  即 指令可以简写为 :要绑定的属性-->
+        <input type="button" value="按钮" :title="mytitle+'123'">
+
+        <!--Vue 中提供了 v-on:  事件绑定机制
+             只要触发按钮的点击事件 就会去当前Vue实例的methods属性中找show方法
+             然后执行show方法
+        -->
+
+        <input type="button" value="按钮点击事件" :title="mytitle+'123'" v-on:click="show">
+        <!-- v-on 也可以缩写 @ -->
+        <input type="button" value="按钮点击事件" :title="mytitle+'123'" @click="show">
+        <input type="button" value="按钮鼠标覆盖事件" :title="mytitle+'123'" v-on:mouseover="show">
+
+
+
+    </div>
+    <script>
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'123',
+                msg2:'<h1>哈哈，我是一个大大的h1 我大 我骄傲</h1>',
+                mytitle:'这是一个自己定义的title'
+            },
+            methods:{//method属性中 定义了 当前Vue实例中所有可用的方法
+                show:function () {
+                    alert("hello")
+                }
+            }
+        })
+    </script>
+        <!-- MVVM分层
+         M:这里的data就是MVVM中的 M ,专门用来保存 每个页面的数据的
+
+         V:Vue实例所控制的这个元素区域 就是我们的 V
+
+         VM:注意 我们new出来的这个vm对象 就是我们MVVM中的 vm 调度者
+
+
+
+         -->
+</body>
+</html>

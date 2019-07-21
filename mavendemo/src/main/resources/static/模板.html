@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Title</title>
+    <!-- 1.导入Vue的包 -->
+    <script src="vue/vue-2.4.0.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+    </div>
+    <script>
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'欢迎学习Vue'
+            },
+            methods:{
+
+            }
+        })
+    </script>
+
+</body>
+</html>

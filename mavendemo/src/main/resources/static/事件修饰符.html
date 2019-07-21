@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Title</title>
+    <!-- 1.导入Vue的包 -->
+    <script src="vue/vue-2.4.0.js"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+        .inner{
+            height: 150px;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <div class="inner" @click="divHandler">
+            <!-- 使用事件修饰符 可以防止事件冒泡-->
+            <input type="button" value="戳他" @click.stop="btnHandler">
+        </div>
+    </div>
+    <script>
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'欢迎学习Vue'
+            },
+            methods:{
+                divHandler:function () {
+                    alert("这是触发了 inner div的点击事件")
+                },
+                btnHandler:function () {
+                    alert("这是触发了 btn的点击事件")
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
